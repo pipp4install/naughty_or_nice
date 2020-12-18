@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
+from sklearn import preprocessing
 
 from sklearn.neural_network import MLPClassifier
 from sklearn.neighbors import KNeighborsClassifier
@@ -32,7 +33,23 @@ def split_dataset(df):
     y = df[target_value].values.ravel()
     return X_train, X_test, y_train, y_Test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
+def categorical_encoder(series_name):
+    enc = preprocessing.OrdinalEncoder(series_name)
 
+mlp_model = MLPClassifier(hidden_layer_sizes = (100, ), activation = 'relu', solver = 'adam', alpha = 0.0001, batch_size = 'auto', learning_rate = 'constant', max_iter=200,)
+mlp_model.fit(X_train, y_train)
+
+y_pred = clf.predict(X_test)
+plt.scatter(y_test, y_pred)
+plt.xlabel("True values")
+plt.ylabel("Predictions")
+
+y_pred = clf.predict(X_test)
+plt.scatter(y_test, y_pred)
+
+predict_proba(X_test[:1])
+mlp_model.predict(X_test[:5, :])
+clf.score(X_test, y_test)
 
 
 h = .02  # step size in the mesh
